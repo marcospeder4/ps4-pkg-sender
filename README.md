@@ -47,7 +47,3 @@
 4. Select the `.pkg` file you want to send and start the transfer.
 
 ---
-
-## 📄 Licencia / License
-
-Este proyecto está bajo la licencia [MIT](LICENSE) (opcional).
