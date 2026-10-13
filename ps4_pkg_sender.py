@@ -60,16 +60,16 @@ def save_config(cfg):
 
 
 class Cancelled(Exception):
-    """El usuario canceló el envío."""
+    """El usuario canceló el envio."""
 
 
 # --------------------------------------------------------------------------
-# Lógica FTP
+# Logica FTP
 # --------------------------------------------------------------------------
 def ftp_connect(host, port):
     ftp = ftplib.FTP()
     ftp.connect(host, port, timeout=30)
-    # Los servidores FTP de la PS4 aceptan cualquier usuario/contraseña
+    # Los servidores FTP de la ps4 aceptan cualquier usuario/contraseña
     ftp.login("anonymous", "anonymous")
     ftp.set_pasv(True)
     return ftp
@@ -87,7 +87,7 @@ def ensure_remote_dir(ftp, path):
 
 
 # --------------------------------------------------------------------------
-# Interfaz gráfica
+# interfaz grafica
 # --------------------------------------------------------------------------
 class App(tk.Tk):
     def __init__(self):
@@ -111,13 +111,13 @@ class App(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self.on_close)
         self.after(100, self.poll_events)
 
-    # ---------------- construcción de la ventana ----------------
+    # ---------------- construccion de la ventana ----------------
     def _build_ui(self):
         pad = {"padx": 10, "pady": 6}
         root = ttk.Frame(self, padding=10)
         root.pack(fill="both", expand=True)
 
-        # 1. Conexión
+        # 1. Conexion
         conn = ttk.LabelFrame(root, text=" 1. Conexión con la PS4 ", padding=10)
         conn.pack(fill="x", **{"pady": 4})
         conn.columnconfigure(1, weight=1)
@@ -163,7 +163,7 @@ class App(tk.Tk):
         self.lbl_total = ttk.Label(btns, text="0 archivos")
         self.lbl_total.pack(side="right")
 
-        # 3. Envío
+        # 3. Envio
         send = ttk.LabelFrame(root, text=" 3. Enviar ", padding=10)
         send.pack(fill="x", pady=4)
         send.columnconfigure(0, weight=1)
@@ -320,7 +320,7 @@ class App(tk.Tk):
             self.events.put(("test", True, msg))
         except Exception as exc:
             self.events.put(("test", False, f"No se pudo conectar: {exc}\n\n"
-                                            "Revisa que la PS4 esté encendida, que el servidor FTP esté activo "
+                                            "Revisa que la ps4 este encendida, que el servidor FTP esté activo "
                                             "y que la IP y el puerto sean correctos."))
 
     def _send_worker(self, host, port, remote_dir, files):
@@ -363,9 +363,9 @@ class App(tk.Tk):
                 ftp.quit()
             except Exception:
                 pass
-            self.events.put(("finished", True, "¡Envío completado!"))
+            self.events.put(("finished", True, "¡Envio completado!"))
         except Cancelled:
-            self.events.put(("finished", False, "Envío cancelado. Puede haber quedado un archivo incompleto en la PS4; bórralo antes de reintentar."))
+            self.events.put(("finished", False, "Envio cancelado. Puede haber quedado un archivo incompleto en la ps4; borralo antes de reintentar."))
         except Exception as exc:
             self.events.put(("finished", False, f"Error durante el envío: {exc}"))
         finally:
@@ -396,7 +396,7 @@ class App(tk.Tk):
                         self.bar_file["value"] = 100
                         self.bar_all["value"] = 100
                         self.lbl_file.config(text="Listo")
-                        messagebox.showinfo(APP_NAME, ev[2] + "\n\nYa puedes instalar el paquete desde tu PS4.")
+                        messagebox.showinfo(APP_NAME, ev[2] + "\n\nYa puedes instalar el paquete desde tu ps4.")
                     else:
                         self.lbl_file.config(text="Detenido")
                         messagebox.showwarning(APP_NAME, ev[2])
@@ -420,7 +420,7 @@ class App(tk.Tk):
 
 
 def main():
-    # Pantallas de alta resolución en Windows: evita que se vea borroso
+    # pantallas de alta resolucion en Windows: evita que se vea borroso
     try:
         import ctypes
         ctypes.windll.shcore.SetProcessDpiAwareness(1)
